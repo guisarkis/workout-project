@@ -1,0 +1,164 @@
+/* .top-container {
+    display: inline;
+} */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.top-container h1 {
+    padding-top: 80px;
+    padding-left: 10%;
+} 
+
+.main {
+    display: inline;
+}
+
+.left-main {
+    display: inline-block;
+    width: 40%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.left-main h1, h2, h3 {
+    padding-left: 5px;
+}
+
+.left-main p {
+    background-color: #ececec;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    /* margin-right: 10%; */
+    margin-bottom: 0;
+}
+
+.right-main {
+    display: inline-block;
+    background-color: #ffffff;
+    vertical-align: top;
+   
+}
+
+/* Workout displays: Left side */
+
+/*  Buttons and clock containers */ 
+.workout-progress { 
+    display: inline-block;
+    width: 100%;
+    
+}
+
+.workout-details th {
+    text-align: left;
+}
+
+.workout-buttons {
+    display: inline;
+}
+
+.clock-container {
+    margin-top: 10px;
+    background-color: #000;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+.clock {
+    font-size: 10rem;
+    font-family: 'Orbitron', sans-serif;
+    align-content: center;
+    color: #fff;
+    padding: 0 20px;
+}
+
+#timer {
+    font-size: 10rem;
+    font-family: 'Orbitron', sans-serif;
+    align-content: center;
+    color: #fff;
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+}
+
+#startstop {
+    /* display: inline-block; */
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+#startstop {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+#reset-workout {
+    background-color: #C70039;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* Workout displays: Right side */
+
+/* Exercises table */
+.workout-table {
+    border: solid 2px #cccccc;
+    border-radius: 5px;
+}
+
+table, th, td {
+    padding: 10px;
+    vertical-align: center;
+}
+
+#ex-name {
+    background-color: #cccccc;
+}
+
+.ex-btn-play {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  /* font-size: 16px; */
+}
+
+.ex-btn-del {
+    background-color: #C70039;
+    border: none;
+    color: white;
+    padding: 10px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* font-size: 16px; */
+}
+
+.ex-btn-dup {
+    background-color: #FFC300;
+    border: none;
+    color: white;
+    padding: 10px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* font-size: 16px; */
+  }

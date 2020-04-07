@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./resources/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron:400,900|Roboto:400,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/df8633355b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./resources/src/better-script.js" async></script>
+    <title>Gui's Workout prototype</title>
+</head>
+<body>
+    <div class="top-container">
+        <h1>Workouts</h1>
+    </div>
+    <div class="main">
+        <div class="left-main">
+            <div class="workout-header">
+                <h2>Workout: "Core and Upper body"</h2>
+                <h3>Type: Abs & Chest</h3>
+                <div class="workout-description">
+                    <p>Description: 3 times a week.</p>
+                </div>
+            </div>
+            <div class="workout-progress">
+                <div class="workout-buttons">
+                    <button id="startstop" onclick="startStop()" onload="initialStartButton">Begin Workout</button>
+                    <button id="reset-workout" onclick="resetTimer()">Reset Workout</button>
+                </div>
+                <div class="clock-container" >
+                <span id="timer" ></span>
+                </div>
+            </div>
+        </div>
+        <div class="right-main">
+            <div class="workout-table">
+                <table id="workout-details">
+                    <tr class="workout-header">
+                        <th></th>
+                        <th>Exercise</th>
+                        <th>Time</th>
+                        <th>Rest</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr id="ex0">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Warm up: High knee taps</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex1">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 1: Russian twists</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex2">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 2: Leg raises</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex3">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 3: Hip raises</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex4">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 4: Flutter kicks</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex5">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 5: Plank climbers</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex6">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 6: Chair sit ups</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex7">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 7: Seated in and outs</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                    <tr id="ex8">
+                        <td><button class="ex-btn-play"><i class="fas fa-play"></i></button></td>
+                        <td class="ex-name">Exercise 8: Jumping Jacks</td>
+                        <td>45"</td>
+                        <td>15"</td>
+                        <td><button class="ex-btn-del"><i class="fas fa-minus-circle"></i></button></td>
+                        <td><button class="ex-btn-dup"><i class="far fa-clone"></i></button></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="workout-controls">
+                <p>+ Add new exercise</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
