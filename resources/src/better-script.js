@@ -1,10 +1,19 @@
 // This is my attempt to improve the script from April 06, 2020 on.
 
-let workoutArray = [[0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 0]];
-let totalLaps = workoutArray.length -1; // (5)
-let lap = 0;
+// Imports (first try) - Didn't work
+// import { expWorkoutArray } from './workoutArray.js';
+
+// How do I import these from another file? (workoutArray.js)
+let testWorkoutArray = [[0,10],[0,10], [0,0]];
+let finalWorkoutArray = [[0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 45], [0, 15], [0, 0]];
+
+// Current workout definitions
+let workoutArray = testWorkoutArray;
+let totalLaps = workoutArray.length -1; // 
+let timerSpeed = 1000;
 
 // Vars that hold initial time values - these are temporary and will be replaced by the units generated from the workout
+let lap = 0;
 let resetMin = workoutArray[lap][0];
 let resetSec = workoutArray[lap][1];
 
@@ -19,64 +28,66 @@ let displayMin = 0;
 // Hold setInterval()
 let interval = null;
 
-// initial Timer status
+// initial and reset Timer status and Display
 let status = "stopped";
+let timeDisplay; // = `${displayMin}:${displaySec}`;
 
-// vars to hold elements by IDs
+// vars to hold HTML elements by IDs
 let timerPanel = document.getElementById("timer"); // Timer panel
 let startButton = document.getElementById("startstop"); // Start/Stop button
 
 // Page load with timer reset
 displayTimer();
-timerPanel.innerHTML = displayMin + ":" + displaySec;
+timerPanel.innerHTML = timeDisplay; // displayMin + ":" + displaySec;
 
 // Timer function: rules to move the timer. It gets called by __ and runs on the set interval
 // 1. Display timer with original values.
-// 2. 
+// 2. Checks when timer reaches 0
+// 2a. If minutes remain, call decMinute()
+// 2b. If 0:0, call addLap()
+// 3. Decrease 1 second
 function timer() {
-  
-    // console.log(seconds);
     
     displaySec = seconds;
     displayMin = minutes;
     
     displayTimer();
 
-    // decrease minutes and flip seconds from '0' to '59' when there are minutes left
+    // When seconds reach zero, but there are minutes left
     if (seconds === 0 && minutes > 0) {
-        minutes--;
-        seconds = 60;
+        decMinute();
     }
-    // When minutes and seconds reach zero: add 1 lap, and...
-    if (minutes === 0 && seconds === 0) {
-        lap++;
-        // console.log(`lap is ${lap}`); // ok
-        // While lap is equal the total number of laps: stop the timer, reset the start button.
-        if (lap === totalLaps) { //ok
-            // console.log("Seconds are: "+seconds+", Minutes are: "+minutes+", Lap is "+lap+".");
-            // console.log("I must stop now");
-            window.clearInterval(interval);
-            status = "stopped";
-            startButton.innerHTML = " Begin Workout";
-            
-        } // While lap is <= to the total number of laps, set seconds to the next array item's value. 
-        else {
-            seconds = workoutArray[lap]+1;
-            // console.log("Seconds are: "+seconds+", and "); // ok
-            // console.log("I won't stop now");
-            
-        }
+    // When minutes and seconds reach zero
+    if (seconds === 0 && minutes === 0) {
+        addLap();
     }
-    
-    seconds--;
-    
-    // Display timer
-    // document.getElementById("timer").innerHTML = displayMin + ":" + displaySec;
-
-    // HOW CAN I GET THIS TO DISPLAY THE '0:00' BETWEEN LAPS??
+   
+    // Decrease 1 second
+    seconds--;   
 }
 
-// Function to alter the style of the timer
+// Decrease minutes and flip seconds from '0' to '59' when there are minutes left
+function decMinute() {
+    minutes--;
+    seconds = 60;
+}
+
+// Adds a lap after each exercise or rest activity
+function addLap() {
+    lap++;
+    // When lap reaches the total number of laps: stop the timer, reset the start button.
+    if (lap === totalLaps) { //ok
+        alert("Workout Finished. Congrats!!")
+        workoutOver();
+        console.log(`Seconds: ${seconds}, Minutes: ${minutes}, Laps: ${lap}. Total laps: ${totalLaps}`);
+    } // While lap is <= to the total number of laps, set seconds to the next array item's value. 
+    else {
+        seconds = workoutArray[lap][1] + 1; // +1 is needed to make sure the next lap starts with actual value. Ideas to fix?
+        minutes = workoutArray[lap][0];
+        }
+    }
+
+// Function to change the style of the timer
 function displayTimer() {
     // Add a '0' to second values under ten
     if (seconds < 10) {
@@ -100,7 +111,10 @@ function displayTimer() {
         displayMin = minutes.toString();
     }
     
-    timerPanel.innerHTML = displayMin + ":" + displaySec;
+    timeDisplay = `${displayMin}:${displaySec}`;
+    // timerPanel.innerHTML = displayMin + ":" + displaySec;
+    timerPanel.innerHTML = timeDisplay;
+    
 }
 
 // Function to control the workout buttons
@@ -110,23 +124,33 @@ const startStop = () => {
     if (status === "stopped") {
         if (minutes > 0 || seconds > 0) {
         // Start timer
-        interval = window.setInterval(timer, 1000);
-        // console.log(interval);
-        startButton.innerHTML = " Stop Workout";
-        status = "started";
-        
-        } else if (minutes === 0 && seconds === 0 && lap === totalLaps) { // not working
-            // window.clearInterval(interval);
-            alert("Reset the timer first");
-            console.log("Timer is Zeroed")
-        }
+        readyButton();
+        } 
+    } else if (status === "workoutover") {
+        alert("Reset the timer first");
+        console.log("Reset timer")
     } else {
-        window.clearInterval(interval);
-        console.log(interval);
-        console.log('I am stopped')
-        startButton.innerHTML = " Begin Workout";
-        status = "stopped";
+        resetButton()
     }
+    
+}
+
+function workoutOver() {
+        resetButton();
+        console.log("Timer is Zeroed")
+        status = "workoutover";
+}
+
+function readyButton() {
+    interval = window.setInterval(timer, timerSpeed);
+    startButton.innerHTML = " Stop Workout";
+    status = "started";
+}
+
+function resetButton() {
+    window.clearInterval(interval);
+    status = "stopped";
+    startButton.innerHTML = " Begin Workout";
 }
 
 // Reset the timer
@@ -145,4 +169,6 @@ function resetTimer() {
 // Next additions:
 // Auto-start rest time and following exercises ok
 // Keep timer from starting if 'min' and 'sec' are '0' ok
-// Add message when timer reaches '0': "Workout finished"
+// Add message when timer reaches '0': "Workout finished" ok (as alert, for the time being)
+// Create a 'current exercise' field that displays the current exercise or rest activity and a 'workout finished' message when its over
+// Create a 'next exercise' field to display the following exercise or rest activity
